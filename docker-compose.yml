@@ -1,0 +1,39 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: kk_53
+      MYSQL_ROOT_PASSWORD: Kalyani@123
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - springboot-mysql-network
+  springboot-app:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/kk_53
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: Kalyani@123
+    volumes:
+      - app-data:/data
+    networks:
+      - springboot-mysql-network
+volumes:
+  mysql-data:
+  app-data:
+networks:
+  springboot-mysql-network:
+
+
+
+
+
+
+
+
+
